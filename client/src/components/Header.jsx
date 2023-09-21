@@ -9,7 +9,7 @@ export default function Header() {
         <div className="p-2"></div>
         <div className="ms-auto p-2">
           <div className="container gray highlightTextIn" style={{marginRight:"100px"}}>
-            <Link alt="HOME">HOME</Link>
+            <Link alt="HOME" to="/">HOME</Link>
             <Link alt="ARTICLES">ARTICLES</Link>
             <Link alt="PORTFOLIO">PORTFOLIO</Link>
             <Link alt="ABOUT">ABOUT</Link>

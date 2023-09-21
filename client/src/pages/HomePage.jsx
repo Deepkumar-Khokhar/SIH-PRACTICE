@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Header from "../components/Header";
 import BackGround from "../Images/BackGround.jpeg";
 import { useNavigate } from "react-router-dom";
-import GPS from "./GPS";
+import GPS from "../components/GPS";
 import '../css/HomePage.css';
 import { Link } from "react-router-dom";
 import AuthContext from "../context/Auth/AuthContext";
@@ -56,6 +56,14 @@ export default function HomePage() {
     navigate("/gps", { state: { busData: bus } }); // Pass data as state
   };
 
+  const formatTime = (timestamp) => {
+    const arrivalTimeDate = new Date(timestamp);
+    const hours = arrivalTimeDate.getHours();
+    const minutes = arrivalTimeDate.getMinutes();
+    const seconds = arrivalTimeDate.getSeconds();
+    return `${hours}:${minutes}:${seconds}`;
+  };
+
   return (
     <>
       <Header />
@@ -80,24 +88,22 @@ export default function HomePage() {
         >
           <div className="row m-3">
             <div className="col-9">
-              <h4 className="text-start fw-bold">{bus.state}-{bus.city}-{bus.alpha}-{bus.numPlate}</h4>
+              <h4 className="text-start fw-bold"><span className="fw-bold">Bus Number: </span>{bus.state}-{bus.city}-{bus.alpha}-{bus.numPlate}</h4>
             </div>
             <div className="col-3">
-              <h4 className="text-end fw-bold">{bus.numPlate}</h4>
+              <h4 className="text-end fw-bold"> Driver No <span className="fw-bold"> : {bus.driverNo}</span></h4>
             </div>
           </div>
           <div className="row m-3">
-            <div className="col-3">
-              <h5 className="text-start">{bus.alpha}</h5>
+            <div className="col-4 text-start">
+            <h5><span className="fw-bold ">Arrival Time: </span>{formatTime(bus.arrivalTime)}</h5>
             </div>
-            <div className="col-3">
-              <h5 className="text-center">Driver No <span className="fw-bold"> : {bus.driverNo}</span></h5>
+            <div className="col-4 text-center">
+            <h5><span className="fw-bold">Duration: </span>{bus.duration}<span className="fw-bold"> Hours</span></h5>
             </div>
-            <div className="col-3">
-              {/* Add more fields as needed */}
-            </div>
-            <div className="col-3">
-              <h5 className="text-end text-black fw-bold">BOOK NOW</h5>
+            
+            <div className="col-4">
+              <h5 className="text-end text-black fw-bold">Track Here</h5>
             </div>
           </div>
         </div>
